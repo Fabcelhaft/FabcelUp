@@ -1,11 +1,35 @@
 = Ablauf
 
+== Programmstart
+
+[plantuml]
+----
+
+@startuml
+(*) --> "Start des Containers fabcelhaft/fabcelup"
+"Start des Containers fabcelhaft/fabcelup" --> "kompiliere im Container mit Gradle-Wrapper."
+note right: Die DSL-Konfiguration muss von extern gemountet werden\n-> Sonst führt dies zu einem Fehler
+"kompiliere im Container mit Gradle-Wrapper." --> "Höre auf REST-Calls mit offenem Port"
+"Höre auf REST-Calls mit offenem Port" --> (*)
+@enduml
+
+----
+
+== Backup
+
 [plantuml]
 ----
 @startuml
 
-(*) -right-> "Aufruf der gesicherten REST-Schnittstelle mit Secrets"
-"Aufruf der gesicherten REST-Schnittstelle mit Secrets" --> "Secrets in geladenem/kompilierten Konfig-Objekt."
+(*) --> "Aufruf der gesicherten REST-Schnittstelle mit Secrets"
+"Aufruf der gesicherten REST-Schnittstelle mit Secrets" --> "Secrets in geladenem Konfig-Objekt einfuegen"
+"Secrets in geladenem Konfig-Objekt einfuegen" --> "sequenzielle Abarbeitung von Inputs"
+"sequenzielle Abarbeitung von Inputs" --> "in internen Ordner 'out' verschieben"
+"in internen Ordner 'out' verschieben" --> "Daten in Archiv packen, sofern konfiguriert"
+"Daten in Archiv packen, sofern konfiguriert" --> "Archiv verschlüsseln, wenn konfiguriert"
+"Archiv verschlüsseln, wenn konfiguriert" --> "Outputs sequenziell abarbeiten"
+"Outputs sequenziell abarbeiten" --> (*)
 
 @enduml
 ----
+
