@@ -1,23 +1,24 @@
-= FabcelUp
 
-== Security
-=== Authentication
-
-== Inputs
-
-=== Dateisystem
-
-=== Postgres
-
-=== MySQL
-
-=== WebDAV
-
-== Outputs
-Für alle Outputs wird eine verschlüsselte *.tar.gz erstellt.
-
-=== Onedrive
-*.tar.gz wird hochgeladen.
-
-=== Get
-Datei wird über eine URL heruntergeladen.
+include::docs/documentation.adoc[]
+//
+//== Security
+//=== Authentication
+//
+//== Inputs
+//
+//=== Dateisystem
+//
+//=== Postgres
+//
+//=== MySQL
+//
+//=== WebDAV
+//
+//== Outputs
+//Für alle Outputs wird eine verschlüsselte *.tar.gz erstellt.
+//
+//=== Onedrive
+//*.tar.gz wird hochgeladen.
+//
+//=== Get
+//Datei wird über eine URL heruntergeladen.

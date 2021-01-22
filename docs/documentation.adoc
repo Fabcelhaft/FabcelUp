@@ -1,0 +1,13 @@
+= FabcelUp
+:toc-title:
+
+include::config.adoc[]
+
+:numbered:
+
+<<<
+include::01-einleitung.adoc[leveloffset+=1]
+
+include::02-dsl.adoc[leveloffset+=1]
+
+include::03-ablauf.adoc[leveloffset+=1]

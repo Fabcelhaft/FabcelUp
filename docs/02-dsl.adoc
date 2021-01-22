@@ -1,0 +1,47 @@
+= DSL
+
+Zur Konfiguration wurde eine entsprechende DSL definiert. Dies kann beispielsweise so aussehen:
+
+[source, groovy]
+----
+//globale Properties
+properties{
+    packaging="tar.gz"
+}
+
+backup{
+    properties {
+        id="mandant42"
+        description="Beschreibung fürs Logging."
+        packaging="tar.gz-encrypted" // alternativ zip, zip-encrypted, tar, tar-encrypted, tar.gz, folder
+        encryptionkey="${secrets[encryptionkey]}"
+        dateformat="yyyy-MM-DD"
+    }
+
+    input{
+        filesystem("/mnt/datadir1") // Wird im Zielarchiv als fs_datadir1 abgelegt.
+        filesystem("/mnt/datadir2")
+        filesystem("/mnt/datadir3")
+        mysql("mysqlHost", "mysqlUsername", "${secrets[mysql.password]}", "databaseName")
+        mysql("mysqlHost", "mysqlUsername", "${secrets[mysql.password]}", "databaseName42", "schemeName")
+        postgres("mysqlHost", "mysqlUsername", "${secrets[postgres.password]}", "databaseName")
+        webdav("http://webdav.url/dav.php", "user", "${secrets[webdav.password]}") //Backup von allen Pfaden
+        webdav("http://webdav.url/dav.php", "user", "${secrets[webdav.password]}", "/path/to/backup")
+    }
+    output{ //exportiert mit "id_timestamp", wenn schon existiert "id_timestamp_counter"
+        filesystem("/output/")
+        onedrive("${onedrive.authttoken}", "/pfad/im/onedrive/")
+        callback_url()
+    }
+}
+
+//minimal
+backup{
+    input{
+        filesystem("/mnt/datadir1")
+    }
+    output{
+        filesystem("/output/")
+    }
+}
+----

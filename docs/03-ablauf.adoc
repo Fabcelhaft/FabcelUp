@@ -1,0 +1,11 @@
+= Ablauf
+
+[plantuml]
+----
+@startuml
+
+(*) -right-> "Aufruf der gesicherten REST-Schnittstelle mit Secrets"
+"Aufruf der gesicherten REST-Schnittstelle mit Secrets" --> "Secrets in geladenem/kompilierten Konfig-Objekt."
+
+@enduml
+----

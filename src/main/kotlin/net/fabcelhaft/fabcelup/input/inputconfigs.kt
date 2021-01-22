@@ -1,7 +1,6 @@
 package net.fabcelhaft.fabcelup.input
 
 import lombok.Data
-import lombok.ToString
 
 interface InputConfig {
 
