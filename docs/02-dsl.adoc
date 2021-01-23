@@ -30,13 +30,16 @@ backup{
     }
     output{ //exportiert mit "id_timestamp", wenn schon existiert "id_timestamp_counter"
         filesystem("/output/")
-        onedrive("${onedrive.authttoken}", "/pfad/im/onedrive/")
+        onedrive("${secrets[onedrive.authttoken]}", "/pfad/im/onedrive/")
         callback_url()
     }
 }
 
 //minimal
 backup{
+    properties{
+        id="filebackup"
+    }
     input{
         filesystem("/mnt/datadir1")
     }

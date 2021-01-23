@@ -8,7 +8,7 @@ class FilesystemInput(val path: String) : Input() {
 
 }
 
-class WebDavInput : Input(){
+class WebDavInput(val url: String, val user: String, val password: String, val path: String) : Input(){
 
 }
 
