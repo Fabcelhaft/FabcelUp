@@ -14,8 +14,8 @@ backup{
         id="mandant42"
         description="Beschreibung fürs Logging."
         packaging="tar.gz-encrypted" // alternativ zip, zip-encrypted, tar, tar-encrypted, tar.gz, folder
-        encryptionkey="${secrets[encryptionkey]}"
-        dateformat="yyyy-MM-DD"
+        encryptionKey="${secrets[encryptionkey]}"
+        dateFormat="yyyy-MM-DD"
     }
 
     input{
