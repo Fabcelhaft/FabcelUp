@@ -1,12 +1,11 @@
 package net.fabcelhaft.fabcelup.dsl
 
 import net.fabcelhaft.fabcelup.model.*
-import javax.security.auth.kerberos.EncryptionKey
 
 open class GlobalPropertiesBuilder{
-    var packaging: String = "tar.gz"
-    var encryptionKey: String = "changeme"
-    var dateFormat : String = ""
+    private var packaging: String = "tar.gz"
+    private var encryptionKey: String = "changeme"
+    private var dateFormat : String = ""
 
     open fun build(): Map<String, String>{
         return mapOf(
@@ -18,8 +17,8 @@ open class GlobalPropertiesBuilder{
 }
 
 class PropertiesBuilder : GlobalPropertiesBuilder() {
-    lateinit var id: String
-    var description: String = ""
+    private lateinit var id: String
+    private var description: String = ""
     // TODO schauen, wie man dafür sorgt die zu unsetten von oben...
 
     override fun build(): Map<String, String>{
@@ -34,13 +33,12 @@ class PropertiesBuilder : GlobalPropertiesBuilder() {
 }
 
 class BackupBuilder {
-    var properties: Map<String, String> = mapOf()
-    var inputs: List<Input> = listOf()
-    var outputs: List<Output> = listOf()
+    private var properties: Map<String, String> = mapOf()
+    private var inputs: List<Input> = listOf()
+    private var outputs: List<Output> = listOf()
 
     fun build(): Backup {
-        val backup = Backup(properties, inputs, outputs)
-        return backup
+        return Backup(properties, inputs, outputs)
     }
 
     fun properties(initalizer: PropertiesBuilder.() -> Unit) {
@@ -61,7 +59,7 @@ class BackupBuilder {
 
 
 class InputBuilder {
-    private val inputs : MutableList<Input> = mutableListOf();
+    private val inputs : MutableList<Input> = mutableListOf()
     fun filesystem(path: String) {
         val filesystemInput = FilesystemInput(path)
         inputs.add(filesystemInput)
@@ -82,13 +80,12 @@ class InputBuilder {
     }
 
     fun getList(): List<Input> {
-        val list : List<Input> = inputs.toList()
-        return list
+        return inputs.toList()
     }
 }
 
 class OutputBuilder {
-    private val outputs : MutableList<Output> = mutableListOf();
+    private val outputs : MutableList<Output> = mutableListOf()
 
     fun filesystem(path: String) {
         val filesystemOutput = FilesystemOutput(path)
@@ -106,8 +103,7 @@ class OutputBuilder {
     }
 
     fun getList(): List<Output> {
-        val list : List<Output> = outputs.toList()
-        return list
+        return outputs.toList()
     }
 }
 
