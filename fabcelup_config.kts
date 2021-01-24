@@ -1,9 +1,5 @@
-= DSL
+import net.fabcelhaft.fabcelup.dsl.*
 
-Zur Konfiguration wurde eine entsprechende DSL definiert. Dies kann beispielsweise so aussehen:
-
-[source, groovy]
-----
 //globale Properties
 properties{
     packaging="tar.gz"
@@ -23,7 +19,6 @@ backup{
         filesystem("/mnt/datadir2")
         filesystem("/mnt/datadir3")
         mysql("mysqlHost", "mysqlUsername", "${secret("mysql.password")}", "databaseName")
-        mysql("mysqlHost", "mysqlUsername", "${secret("mysql.password")}", "databaseName42", "schemeName")
         postgres("mysqlHost", "mysqlUsername", "${secret("postgres.password")}", "databaseName")
         webdav("http://webdav.url/dav.php", "user", "${secret("webdav.password")}") //Backup von allen Pfaden
         webdav("http://webdav.url/dav.php", "user", "${secret("webdav.password")}", "/path/to/backup")
@@ -47,4 +42,3 @@ backup{
         filesystem("/output/")
     }
 }
-----

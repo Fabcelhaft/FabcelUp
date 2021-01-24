@@ -19,11 +19,14 @@ configurations {
 
 repositories {
 	mavenCentral()
+	maven {
+		setUrl("https://dl.bintray.com/s1m0nw1/KtsRunner")
+	}
 }
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
-	implementation("org.springframework.boot:spring-boot-starter-security")
+	//implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -35,6 +38,8 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
+	implementation(kotlin("script-runtime"))
+	implementation("de.swirtz:ktsRunner:0.0.9")
 }
 
 tasks.withType<KotlinCompile> {

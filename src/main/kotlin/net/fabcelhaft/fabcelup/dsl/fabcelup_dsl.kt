@@ -1,13 +1,14 @@
 package net.fabcelhaft.fabcelup.dsl
 
+import net.fabcelhaft.fabcelup.data.PersistentData
 import net.fabcelhaft.fabcelup.model.*
 
-open class GlobalPropertiesBuilder{
-    private var packaging: String = "tar.gz"
-    private var encryptionKey: String = "changeme"
-    private var dateFormat : String = ""
+open class GlobalPropertiesBuilder {
+    var packaging: String = "tar.gz"
+    var encryptionKey: String = "changeme"
+    var dateFormat: String = ""
 
-    open fun build(): Map<String, String>{
+    open fun build(): Map<String, String> {
         return mapOf(
             Pair("packaging", packaging),
             Pair("encryptionKey", encryptionKey),
@@ -17,11 +18,11 @@ open class GlobalPropertiesBuilder{
 }
 
 class PropertiesBuilder : GlobalPropertiesBuilder() {
-    private lateinit var id: String
-    private var description: String = ""
+    lateinit var id: String
+    var description: String = ""
     // TODO schauen, wie man dafür sorgt die zu unsetten von oben...
 
-    override fun build(): Map<String, String>{
+    override fun build(): Map<String, String> {
         val map = mapOf(
             Pair("id", id),
             Pair("description", description),
@@ -57,14 +58,14 @@ class BackupBuilder {
     }
 }
 
-
 class InputBuilder {
-    private val inputs : MutableList<Input> = mutableListOf()
+    private val inputs: MutableList<Input> = mutableListOf()
     fun filesystem(path: String) {
         val filesystemInput = FilesystemInput(path)
         inputs.add(filesystemInput)
     }
-    fun webdav(url: String, user: String, password: String, path: String) {
+
+    fun webdav(url: String, user: String, password: String, path: String = "/") {
         val webDavInput = WebDavInput(url, user, password, path)
         inputs.add(webDavInput)
     }
@@ -85,7 +86,7 @@ class InputBuilder {
 }
 
 class OutputBuilder {
-    private val outputs : MutableList<Output> = mutableListOf()
+    private val outputs: MutableList<Output> = mutableListOf()
 
     fun filesystem(path: String) {
         val filesystemOutput = FilesystemOutput(path)
@@ -97,7 +98,7 @@ class OutputBuilder {
         outputs.add(onedriveOutput)
     }
 
-    fun callback_url() {
+    fun callbackUrl() {
         val callbackURLOutput = CallbackURLOutput()
         outputs.add(callbackURLOutput)
     }
@@ -107,11 +108,19 @@ class OutputBuilder {
     }
 }
 
-
-fun properties(initalizer: GlobalPropertiesBuilder.() -> Unit): GlobalPropertiesBuilder{
-    return GlobalPropertiesBuilder().apply(initalizer)
+fun properties(initalizer: GlobalPropertiesBuilder.() -> Unit): Map<String, String> {
+    val propertiesBuilder = GlobalPropertiesBuilder().apply(initalizer)
+    val build = propertiesBuilder.build()
+    return build
 }
 
-fun backup(initalizer: BackupBuilder.() -> Unit): BackupBuilder{
-    return BackupBuilder().apply(initalizer)
+fun backup(initalizer: BackupBuilder.() -> Unit): Backup {
+    val backupBuilder = BackupBuilder().apply(initalizer)
+    val backup = backupBuilder.build()
+    return backup
+}
+
+fun secret(key: String): String {
+    val secrets = PersistentData.secrets
+    return secrets.getOrDefault(key, "")
 }
