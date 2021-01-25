@@ -21,7 +21,7 @@ class MySQLInput(host: String, username: String, password: String, databaseName:
 
 }
 
-class PostgresInput(host: String, username: String, password: String, databaseName: String)
+class PostgresInput(host: String, username: String, password: String, databaseName: String, schema: String = "public")
     : DatabaseInput(host, username, password, databaseName){
 
 }

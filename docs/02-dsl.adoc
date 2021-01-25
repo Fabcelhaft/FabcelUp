@@ -23,11 +23,12 @@ backup{
         filesystem("/mnt/datadir2")
         filesystem("/mnt/datadir3")
         mysql("mysqlHost", "mysqlUsername", "${secret("mysql.password")}", "databaseName")
-        mysql("mysqlHost", "mysqlUsername", "${secret("mysql.password")}", "databaseName42", "schemeName")
+        mysql("mysqlHost", "mysqlUsername", "${secret("mysql.password")}", "databaseName42", "schemaName")
         postgres("mysqlHost", "mysqlUsername", "${secret("postgres.password")}", "databaseName")
         webdav("http://webdav.url/dav.php", "user", "${secret("webdav.password")}") //Backup von allen Pfaden
         webdav("http://webdav.url/dav.php", "user", "${secret("webdav.password")}", "/path/to/backup")
     }
+
     output{ //exportiert mit "id_timestamp", wenn schon existiert "id_timestamp_counter"
         filesystem("/output/")
         onedrive("${secret("onedrive.authttoken")}", "/pfad/im/onedrive/")

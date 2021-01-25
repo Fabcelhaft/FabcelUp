@@ -75,8 +75,8 @@ class InputBuilder {
         inputs.add(mySQLInput)
     }
 
-    fun postgres(host: String, username: String, password: String, database: String) { //TODO optional scheme
-        val postgresInput = PostgresInput(host, username, password, database)
+    fun postgres(host: String, username: String, password: String, database: String, scheme: String = "public") { //TODO optional scheme
+        val postgresInput = PostgresInput(host, username, password, database, scheme)
         inputs.add(postgresInput)
     }
 
@@ -111,12 +111,14 @@ class OutputBuilder {
 fun properties(initalizer: GlobalPropertiesBuilder.() -> Unit): Map<String, String> {
     val propertiesBuilder = GlobalPropertiesBuilder().apply(initalizer)
     val build = propertiesBuilder.build()
+    PersistentData.globalProperties.putAll(build)
     return build
 }
 
 fun backup(initalizer: BackupBuilder.() -> Unit): Backup {
     val backupBuilder = BackupBuilder().apply(initalizer)
     val backup = backupBuilder.build()
+    PersistentData.backups.add(backup)
     return backup
 }
 
