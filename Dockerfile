@@ -2,7 +2,7 @@ FROM adoptopenjdk:15
 
 VOLUME /tmp
 
-ADD libs/fabcelup**.jar app.jar
+ADD build/libs/fabcelup**.jar app.jar
 
 RUN bash -c 'touch /app.jar'
 
