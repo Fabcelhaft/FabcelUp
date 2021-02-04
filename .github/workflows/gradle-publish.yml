@@ -40,3 +40,5 @@ jobs:
       uses: docker/build-push-action@v2
       with:
         tags: fabcelhaft/fabcelup:latest
+        context: .
+        labels: github
