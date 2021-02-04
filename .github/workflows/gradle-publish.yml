@@ -42,3 +42,4 @@ jobs:
         tags: fabcelhaft/fabcelup:latest
         context: .
         labels: github
+        push: true
