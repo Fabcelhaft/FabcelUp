@@ -5,4 +5,4 @@ import org.springframework.context.annotation.Configuration
 
 @Configuration
 @ConfigurationProperties(prefix = "fabcelup")
-class FabcelUpConfig(var configfile: String = "/conf/config.fabcelup.kts", )
+class FabcelUpProperties(var configfile: String = "/conf/config.fabcelup.kts", )
