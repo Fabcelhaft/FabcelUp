@@ -1,0 +1,13 @@
+= Konfiguration
+
+|===
+|Variable |Beschreibung | Standarwert
+
+|fabcelup.configfile
+|Pfad zur Backup-Konfigurationsdatei
+|/conf/config.fabcelup.kts
+
+|Column 1, row 2
+|Column 2, row 2
+|Column 3, row 2
+|===

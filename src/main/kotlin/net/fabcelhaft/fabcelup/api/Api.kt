@@ -11,6 +11,7 @@ import java.nio.file.Paths
 
 @RestController
 class Api {
+
     @PostMapping("start")
     fun backupTrigger(@RequestBody information: BackupInformation) {
         try {

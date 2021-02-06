@@ -1,6 +1,8 @@
 = FabcelUp
 :toc-title:
 
+image::https://github.com/Fabcelhaft/FabcelUp/workflows/Gradle%20Package%20and%20Build%20Container/badge.svg?branch=main[]
+
 include::config.adoc[]
 
 :numbered:
@@ -10,4 +12,6 @@ include::01-einleitung.adoc[leveloffset+=1]
 
 include::02-dsl.adoc[leveloffset+=1]
 
-include::03-ablauf.adoc[leveloffset+=1]
+include::03-config.adoc[leveloffset+=1]
+
+include::04-ablauf.adoc[leveloffset+=1]
