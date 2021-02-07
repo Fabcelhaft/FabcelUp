@@ -33,3 +33,13 @@ note right: Die DSL-Konfiguration muss von extern gemountet werden\n-> Sonst fü
 @enduml
 ----
 
+== technischer Ablauf
+
+[plantuml]
+----
+@startuml
+
+(*) --> "'fabcelup.workdir' anlegen"
+
+@enduml
+----

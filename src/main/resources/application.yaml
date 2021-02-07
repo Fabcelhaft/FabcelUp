@@ -1,0 +1,6 @@
+spring:
+  security:
+    user:
+      name: fabcelup
+      password: fabcelup#2020
+      roles: ADMIN,USER

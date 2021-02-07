@@ -31,8 +31,4 @@ class FabcelUpApi(
             PersistentData.clearPersistentDataForBackup()
         }
     }
-
-    fun getURL(): String {
-        TODO()
-    }
 }

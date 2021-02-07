@@ -1,5 +1,6 @@
 package net.fabcelhaft.fabcelup.dsl
 
+import net.fabcelhaft.fabcelup.FabcelUpPropertyKeys
 import net.fabcelhaft.fabcelup.data.PersistentData
 import net.fabcelhaft.fabcelup.model.*
 
@@ -10,9 +11,9 @@ open class GlobalPropertiesBuilder {
 
     open fun build(): Map<String, String> {
         return mapOf(
-            Pair("packaging", packaging),
-            Pair("encryptionKey", encryptionKey),
-            Pair("dateFormat", dateFormat)
+            Pair(FabcelUpPropertyKeys.PACKAGING.key, packaging),
+            Pair(FabcelUpPropertyKeys.ENCRYPTION_KEY.key, encryptionKey),
+            Pair(FabcelUpPropertyKeys.DATE_FORMAT.key, dateFormat)
         )
     }
 }
@@ -23,8 +24,8 @@ class PropertiesBuilder : GlobalPropertiesBuilder() {
 
     override fun build(): Map<String, String> {
         val map = mapOf(
-            Pair("id", id),
-            Pair("description", description),
+            Pair(FabcelUpPropertyKeys.ID.key, id),
+            Pair(FabcelUpPropertyKeys.DESCRIPTION.key, description),
         )
 
         val mapGlobal = super.build()
