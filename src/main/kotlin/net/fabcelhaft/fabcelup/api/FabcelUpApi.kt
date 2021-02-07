@@ -1,37 +1,38 @@
 package net.fabcelhaft.fabcelup.api
 
-import de.swirtz.ktsrunner.objectloader.KtsObjectLoader
 import net.fabcelhaft.fabcelup.FabcelUpProperties
 import net.fabcelhaft.fabcelup.data.PersistentData
 import net.fabcelhaft.fabcelup.model.BackupInformation
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
-import java.nio.file.Files
-import java.nio.file.Paths
+import kotlin.math.log
 
 @RestController
 class FabcelUpApi(
-    @Autowired
-    var config: FabcelUpProperties
+    @Autowired var properties: FabcelUpProperties
 ) {
+
+    val log: Logger = LoggerFactory.getLogger(javaClass)
 
     @PostMapping("start")
     fun backupTrigger(@RequestBody information: BackupInformation) {
         try {
-            PersistentData.secrets.putAll(information.secrets)
-            val scriptPath = Paths.get(config.configfile)
-            val scriptReader =  Files.newBufferedReader(scriptPath)
-            KtsObjectLoader().load<Any>(scriptReader)
+            log.info("Starting Backup")
+            log.debug("Backupinformation: $information")
+            PersistentData.initPersistentDataForBackup(information, properties)
+            log.info("Finished Backup")
+        }catch (e: Exception){
+            log.error("Error while processing Backup", e)
         }finally {
-            PersistentData.secrets.clear()
-            PersistentData.globalProperties.clear()
-            PersistentData.backups.clear()
+            PersistentData.clearPersistentDataForBackup()
         }
     }
 
     fun getURL(): String {
-        return "TODO"
+        TODO()
     }
 }

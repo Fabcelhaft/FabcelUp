@@ -20,7 +20,6 @@ open class GlobalPropertiesBuilder {
 class PropertiesBuilder : GlobalPropertiesBuilder() {
     lateinit var id: String
     var description: String = ""
-    // TODO schauen, wie man dafür sorgt die zu unsetten von oben...
 
     override fun build(): Map<String, String> {
         val map = mapOf(
@@ -70,13 +69,13 @@ class InputBuilder {
         inputs.add(webDavInput)
     }
 
-    fun mysql(host: String, username: String, password: String, database: String) { //TODO optional scheme
+    fun mysql(host: String, username: String, password: String, database: String) {
         val mySQLInput = MySQLInput(host, username, password, database)
         inputs.add(mySQLInput)
     }
 
-    fun postgres(host: String, username: String, password: String, database: String, scheme: String = "public") { //TODO optional scheme
-        val postgresInput = PostgresInput(host, username, password, database, scheme)
+    fun postgres(host: String, username: String, password: String, database: String, schema: String = "public") {
+        val postgresInput = PostgresInput(host, username, password, database, schema)
         inputs.add(postgresInput)
     }
 
@@ -108,8 +107,8 @@ class OutputBuilder {
     }
 }
 
-fun properties(initalizer: GlobalPropertiesBuilder.() -> Unit): Map<String, String> {
-    val propertiesBuilder = GlobalPropertiesBuilder().apply(initalizer)
+fun properties(initializer: GlobalPropertiesBuilder.() -> Unit): Map<String, String> {
+    val propertiesBuilder = GlobalPropertiesBuilder().apply(initializer)
     val build = propertiesBuilder.build()
     PersistentData.globalProperties.putAll(build)
     return build

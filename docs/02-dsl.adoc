@@ -13,25 +13,24 @@ backup{
     properties {
         id="mandant42"
         description="Beschreibung fürs Logging."
-        packaging="tar.gz-encrypted" // alternativ zip, zip-encrypted, tar, tar-encrypted, tar.gz, folder
+        packaging="tar.gz-encrypted"
         encryptionKey="${secret("encryptionkey")}"
         dateFormat="yyyy-MM-DD"
     }
 
     input{
-        filesystem("/mnt/datadir1") // Wird im Zielarchiv als fs_datadir1 abgelegt.
+        filesystem(path = "/mnt/datadir1") // Wird im Zielarchiv als fs_datadir1 abgelegt.
         filesystem("/mnt/datadir2")
-        filesystem("/mnt/datadir3")
-        mysql("mysqlHost", "mysqlUsername", "${secret("mysql.password")}", "databaseName")
-        mysql("mysqlHost", "mysqlUsername", "${secret("mysql.password")}", "databaseName42", "schemaName")
-        postgres("mysqlHost", "mysqlUsername", "${secret("postgres.password")}", "databaseName")
-        webdav("http://webdav.url/dav.php", "user", "${secret("webdav.password")}") //Backup von allen Pfaden
-        webdav("http://webdav.url/dav.php", "user", "${secret("webdav.password")}", "/path/to/backup")
+        filesystem(path = "/mnt/datadir3")
+        mysql(host = "mysqlHost", username = "mysqlUsername", password = "${secret("mysql.password")}", database = "databaseName")
+        postgres(host = "mysqlHost", username = "mysqlUsername", password = "${secret("postgres.password")}", database = "databaseName")
+        webdav(url = "http://webdav.url/dav.php", user = "user", password = "${secret("webdav.password")}") //Backup von allen Pfaden
+        webdav(url = "http://webdav.url/dav.php", user = "user", password = "${secret("webdav.password")}", path = "/path/to/backup")
     }
 
     output{ //exportiert mit "id_timestamp", wenn schon existiert "id_timestamp_counter"
-        filesystem("/output/")
-        onedrive("${secret("onedrive.authttoken")}", "/pfad/im/onedrive/")
+        filesystem(path = "/output/")
+        onedrive(token = "${secret("onedrive.authttoken")}", path = "/pfad/im/onedrive/")
         callbackUrl()
     }
 }
@@ -49,3 +48,56 @@ backup{
     }
 }
 ----
+
+== Properties
+
+
+|===
+|Property |Beschreibung |Standardwert |Scope |Pflichtfeld |Werte
+
+|packaging
+|Bestimmt die Paketierung.
+|tar.gz
+|globale & lokale Properties
+|Nein
+|tar, tar-crypt, tar.gz, tar.gz-crypt, zip, zip-crypt
+
+|id
+|Eindeutige ID für das Backup
+|
+|lokale Properties
+|Ja
+|Alfanumerischer Wert
+
+|description
+|Beschreibung für Logs und Co.
+|
+|lokale Properties
+|Nein
+|Alfanumerischer Wert
+
+|dateFormat
+|Datumsformat für Dateinamen und Logs
+|yyyy-MM-DD
+|globale & lokale Properties
+|Nein
+|Dateformat-String
+
+|encryptionKey
+|Schlüssel für die Verschlüsselung
+|
+|globale & lokale Properties
+|Ja, wenn packaging crypt ist
+|TODO MKE
+|===
+
+== Inputs
+
+=== Filesystem
+
+|===
+|Variable |Beschreibung |Standardwert
+
+|
+
+|===
