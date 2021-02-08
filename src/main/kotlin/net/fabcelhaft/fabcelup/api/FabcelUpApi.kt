@@ -25,7 +25,7 @@ class FabcelUpApi(
             log.info("Starting Backup")
             log.debug("Backupinformation: $information")
             PersistentData.initPersistentDataForBackup(information, properties)
-            backupProcessing.runBackup()
+            backupProcessing.processBackups()
             log.info("Finished Backup")
         }catch (exception: Exception){
             log.error("Error while processing Backup", exception)

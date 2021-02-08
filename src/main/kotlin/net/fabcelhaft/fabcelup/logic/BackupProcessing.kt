@@ -17,7 +17,7 @@ class BackupProcessing(@Autowired val properties: FabcelUpProperties){
 
     var generalWorkingDir = File("work/")
 
-    fun runBackup() {
+    fun processBackups() {
         val generalWorkDir = createWorkDir()
         //checkConfiguration() TODO is everything basic needed
         progressBackups()
@@ -29,17 +29,19 @@ class BackupProcessing(@Autowired val properties: FabcelUpProperties){
     }
 
     private fun progressBackups() {
-        PersistentData.backups.stream().forEach(this::runBackup)
+        PersistentData.backups.stream().forEach(this::processBackups)
     }
 
-    private fun runBackup(backup: Backup){
+    private fun processBackups(backup: Backup){
         val id = backup.properties[FabcelUpPropertyKeys.ID.key]
         val backupWorkingDir = File("${generalWorkingDir.absolutePath}${File.separator}$id")
         mkdirs(backupWorkingDir)
+        val backUpRunner = BackupRunner(backup, properties, backupWorkingDir)
+        backUpRunner.runBackup()
     }
 
     /**
-     * Erstellt einen ordner mit allen Zwischenebenen
+     * Erstellt einen Ordner mit allen Zwischenebenen
      */
     private fun mkdirs(directory: File) {
         val mkdirsResult = directory.mkdirs()
