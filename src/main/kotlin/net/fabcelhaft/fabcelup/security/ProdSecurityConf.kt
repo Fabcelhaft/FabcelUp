@@ -8,7 +8,7 @@ import org.springframework.security.config.web.servlet.invoke
 
 @Configuration
 @Profile("production", "prod")
-class KotlinSecurityConfiguration : WebSecurityConfigurerAdapter() {
+class ProdSecurityConf : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity?) {
         http {
