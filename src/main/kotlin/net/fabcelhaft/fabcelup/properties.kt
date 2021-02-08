@@ -13,5 +13,5 @@ enum class FabcelUpPropertyKeys(val key: String){
         DESCRIPTION("description"),
         PACKAGING("packaging"),
         ENCRYPTION_KEY("encryptionKey"),
-        DATE_FORMAT("dateFormat"),
+        DATE_FORMAT("dateFormat")
 }
